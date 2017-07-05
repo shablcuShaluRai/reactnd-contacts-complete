@@ -6,7 +6,7 @@ import * as ContactsAPI from './utils/ContactsAPI'
 
 class App extends Component {
   state = {
-    screen:'list',
+  
     contacts: []
   }
   componentDidMount() {
@@ -34,7 +34,7 @@ class App extends Component {
   />
 <Route path='/create'
 component={CreateContact}
-/>      
+/>
       </div>
     )
   }
