@@ -7,6 +7,9 @@ import sortBy from 'sort-by'
 
 class ListContacts extends Component {
   static propTypes = {
+    // propTypes allows us to do is it allows us to specify the  specific types of the props that are passing
+    //into specific component  and we also are allowed to specify if thery are required or not .
+    //if we are not passing data as propTypes required , then it throws an error on console  and  app will not work.  
     contacts: PropTypes.array.isRequired,
     onDeleteContact: PropTypes.func.isRequired
   }
@@ -49,7 +52,6 @@ class ListContacts extends Component {
 
             <Link
              to='/create'
-            
             className='add-contact'
           >Add Contact</Link>
           </div>

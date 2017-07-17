@@ -5,18 +5,31 @@ import CreateContact from './CreateContact'
 import * as ContactsAPI from './utils/ContactsAPI'
 
 class App extends Component {
+
   state = {
 
     contacts: []
   }
+  // componentDidMount is the lifecycle methods
+  // it is executed after first render only on the client side .If we need to load data from server ao remote endpoint
+  // it is used for instantiate the network request.
+  // If we want to make ajax request then we use the componentDidMount().
   componentDidMount() {
+    //getAll methods belons to the ContactsAPI,it used for get all the contacts data from server
     ContactsAPI.getAll().then((contacts) => {
+      //this.setState method, used to update the  local component state of contacts.
       this.setState({ contacts })
     })
   }
-
+// when removeContact invoked "(contact)" it is going to pass a specific contacts that was clicked on.
   removeContact = (contact) => {
+    //this state method is by passing it a function , and this function is going to return new object that is
+    // going to merge with current state.
+    //2. we use functional setState method , when new state of our components depends on the prevoius state of components.
+    // NOTE: UI is the function of  state  in react. once the state changed ,UI will automatically update.
     this.setState((state) => ({
+      //we are going to filter current contacts on our state ,we are going to remove the state contact id does not
+      //equal to the id of contacts that was clicked on.
       contacts: state.contacts.filter((c) => c.id !== contact.id)
     }))
       ContactsAPI.remove(contact)
@@ -32,8 +45,10 @@ class App extends Component {
   render() {
     return (
       <div>
+
        <Route exact path='/'render={() =>(
         <ListContacts
+        // onDeleteContact it's going to reference the  remove contact.
         onDeleteContact={this.removeContact}
         contacts={this.state.contacts}
         />
