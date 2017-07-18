@@ -34,9 +34,15 @@ class App extends Component {
     }))
       ContactsAPI.remove(contact)
   }
+
+  //Here , ContactsAPI call the create method and pass the contact here.this gives a promise back and then
+  //send us the contact from to the server
   createContact(contact) {
      ContactsAPI.create(contact).then(contact => {
       this.setState(state => ({
+        //the current state of the contacts will concat with new contacts.
+        //so it returns a new array and we have new person in our contact list.
+
         contacts: state.contacts.concat([ contact ])
       }))
     })
@@ -46,6 +52,11 @@ class App extends Component {
     return (
       <div>
 
+{/* Route takes a path that will match the URL or not.
+//If the path matches , then Route will render some UI, if won't render anything then it does not matche.
+//it will render the screen for us.*/}
+
+{/* it renders the contact list screen.*/}
        <Route exact path='/'render={() =>(
         <ListContacts
         // onDeleteContact it's going to reference the  remove contact.
@@ -54,10 +65,12 @@ class App extends Component {
         />
   )}
   />
+  {/*when the path matches with /create (e.g https://localhost3000/create) then it renders the  createContact scren.*/}
   <Route path='/create' render={({ history }) => (
             <CreateContact
               onCreateContact={(contact) => {
                 this.createContact(contact)
+                /* so we create a contact and then we are going to go back to the list.so we should add new person in the list.*/
                 history.push('/')
               }}
             />
